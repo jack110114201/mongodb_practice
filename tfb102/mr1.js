@@ -29,38 +29,12 @@ db.mr1.insert(
 	]
 );
 
-var mapxx = function(){
-	for(var key in this){
-		if(key !== '_id'){
-			emit(key,{count:1}); //丟KEY、VALUE給MONGODB，VALUE固定是{count:1}
-		}
-	}
-}
-
-var reducexx = function(key,emits){
-	total = 0;
-	for(var i in emits){
-		total+=emits[i].count;
-	}
-	return {count:total}
-	
-}
-
-// var mrResult = db.runCommand({'mapreduce':'mr1','map':mapxx,'reduce':reducexx,"out":{inline:1}});
-// printjson(mrResult);
-
-var mrResult = db.mr1.mapReduce(mapxx,reducexx,{out:'coll_20210314'});
-findAllAndShow('coll_20210314');
-
-
-
-
-
-
-
-
 // var mapxx = function(){
-	// emit(this["age"],{count:1});
+	// for(var key in this){
+		// if(key !== '_id'){
+			// emit(key,{count:1}); //丟KEY、VALUE給MONGODB，VALUE固定是{count:1}
+		// }
+	// }
 // }
 
 // var reducexx = function(key,emits){
@@ -68,8 +42,38 @@ findAllAndShow('coll_20210314');
 	// for(var i in emits){
 		// total+=emits[i].count;
 	// }
-	// return {count:total};
+	// return {count:total}
+	
 // }
+
+// var mrResult = db.runCommand({'mapreduce':'mr1','map':mapxx,'reduce':reducexx,"out":{inline:1}});
+// printjson(mrResult);
+
+// var mrResult = db.mr1.mapReduce(mapxx,reducexx,{out:'coll_20210314'});
+// findAllAndShow('coll_20210314');
+
+
+
+
+
+
+
+
+var mapxx = function(){
+	emit(this["age"],{count:1});
+}
+
+var reducexx = function(key,emits){
+	total = 0;
+	for(var i in emits){
+		total+=emits[i].count;
+	}
+	return {count:total};
+}
+
+
+var mrResult = db.userNonIndex.mapReduce(mapxx,reducexx,{out:'coll_20210314'});
+findAllAndShow('coll_20210314');
 
 
 // var mrResult = db.runCommand({'mapreduce':'usersNonIndex','map':mapxx,'reduce':reducexx,"out":{inline:1}});

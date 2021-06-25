@@ -24,9 +24,9 @@ var article1 = {
 	tags:['c++','mongodb']
 }
 
-emit(this.tags[i],{"urls":[this.url]});
-"c++"       {"urls":["http://A"]}
-"mongodb"   {"urls":["http://A"]}
+// emit(this.tags[i],{"urls":[this.url]});
+// "c++"       {"urls":["http://A"]}
+// "mongodb"   {"urls":["http://A"]}
 
 var article2 = {
 	date:(new Date(2016,3,25)),
